@@ -225,43 +225,7 @@
         </div>`; }
     },
 
-    /* 6 · Audio prayer */
-    { hdr: false, pg: true, pct: 60,
-      html() { return `
-        <div class="step-enter flex flex-col gap-6 text-center">
-          <h1 class="text-lg font-semibold text-gray-900 leading-snug">
-            Vamos rezar juntos com fé e confiança.
-          </h1>
-          <p class="text-base text-gray-600 leading-relaxed">
-            Clique no botão abaixo para ouvir esta oração e colocar suas intenções
-            sob a proteção do Coração Imaculado de Maria. 🙏🌹❤️
-          </p>
-          <div class="bg-gray-50 border border-gray-200 rounded-2xl p-4 flex flex-col gap-4">
-            <!-- audio player UI -->
-            <div class="flex flex-col gap-2">
-              <div class="w-full bg-gray-200 rounded-full h-1.5 cursor-pointer" onclick="seekAudio(event,this)">
-                <div id="aBar" class="bg-sky-500 h-1.5 rounded-full pointer-events-none" style="width:0%"></div>
-              </div>
-              <div class="flex justify-between text-xs text-gray-400">
-                <span id="aTime">0:00</span><span>3:45</span>
-              </div>
-              <div class="flex justify-center">
-                <button id="aBtn" onclick="toggleAudio()"
-                  class="w-12 h-12 bg-sky-500 hover:bg-sky-600 text-white rounded-full flex items-center justify-center transition-colors">
-                  ▶
-                </button>
-              </div>
-            </div>
-          </div>
-          <button onclick="next()"
-            class="w-full bg-sky-500 hover:bg-sky-600 text-white font-semibold py-4 rounded-xl text-base transition-colors">
-            Continuar
-          </button>
-        </div>`; },
-      onEnter() { audioReset(); }
-    },
-
-    /* 7 · Prayer form */
+    /* 6 · Prayer form */
     { hdr: true, pg: true, pct: 80,
       html() { return `
         <div class="step-enter flex flex-col gap-5">
