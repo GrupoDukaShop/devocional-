@@ -352,7 +352,7 @@
     },
 
 
-   /* 12 · ETAPA 07 – sales page */
+  /* 12 · ETAPA 07 – sales page */
     { hdr: false, pg: false, pct: 100,
       html() {
         const buyBtn = () => `
@@ -367,18 +367,6 @@
             </p>
           </div>`;
 
-        const imgPlaceholder = (cls='w-full') => `
-          <div class="${cls} bg-gray-100 border border-gray-300 rounded-xl flex items-center justify-center py-10 text-gray-500 text-sm font-medium">
-            [ imagem aqui ]
-          </div>`;
-
-        const carouselSlides = [1,2,3,4,5,6].map((_, i) => `
-          <div class="carousel-slide px-1">
-            <div class="w-full bg-gray-100 border border-gray-300 rounded-xl flex items-center justify-center py-16 text-gray-500 text-sm font-medium">
-              [ imagem aqui ]
-            </div>
-          </div>`).join('');
-
         const dots = [0,1,2,3,4,5].map(i => `
           <button onclick="carouselGo(${i})"
             class="w-2 h-2 rounded-full transition-colors ${i===0?'bg-sky-500':'bg-gray-300'}"
@@ -392,21 +380,21 @@
             <strong> Veja abaixo&nbsp;🙏</strong>
           </h1>
 
-          ${ imgPlaceholder('w-full') }
+          <img src="img1.png" alt="" class="w-full rounded-xl">
 
           <h2 class="text-lg font-semibold text-gray-900 text-center">O que está incluso em seu pacote devocional?</h2>
 
-          ${ imgPlaceholder('w-full') }
-          ${ imgPlaceholder('w-full') }
+          <img src="img2.png" alt="" class="w-full rounded-xl">
+          <img src="img3.png" alt="" class="w-full rounded-xl">
 
           ${ buyBtn() }
 
-          ${ imgPlaceholder('w-full') }
-          ${ imgPlaceholder('w-full') }
+          <img src="img4.png" alt="" class="w-full rounded-xl">
+          <img src="img5.png" alt="" class="w-full rounded-xl">
 
           ${ buyBtn() }
 
-          ${ imgPlaceholder('w-60 mx-auto') }
+          <img src="img6.png" alt="" class="w-60 mx-auto rounded-xl block">
 
           <div class="text-center">
             <h2 class="text-lg font-semibold text-gray-900">Nosso Devocional é confiavel?</h2>
@@ -415,7 +403,12 @@
 
           <div class="relative overflow-hidden rounded-2xl" id="carousel">
             <div class="carousel-track" id="cTrack">
-              ${carouselSlides}
+              <div class="carousel-slide px-1"><img src="img7.png"  alt="" class="w-full rounded-xl"></div>
+              <div class="carousel-slide px-1"><img src="img8.png"  alt="" class="w-full rounded-xl"></div>
+              <div class="carousel-slide px-1"><img src="img9.png"  alt="" class="w-full rounded-xl"></div>
+              <div class="carousel-slide px-1"><img src="img10.png" alt="" class="w-full rounded-xl"></div>
+              <div class="carousel-slide px-1"><img src="img11.png" alt="" class="w-full rounded-xl"></div>
+              <div class="carousel-slide px-1"><img src="img12.png" alt="" class="w-full rounded-xl"></div>
             </div>
             <div class="flex justify-center gap-1.5 mt-3" id="cDots">
               ${dots}
@@ -429,12 +422,13 @@
             <p class="text-sm text-gray-600 mt-1">SIM! Estamos tão confiantes que o nosso Devocional te ajudará que garantimos um reembolso total no prazo de 90 dias após a compra.</p>
           </div>
 
-          ${ imgPlaceholder('w-44 mx-auto') }
+          <img src="img13.png" alt="" class="w-44 mx-auto rounded-xl block">
 
         </div>`;
       },
       onEnter() { setTimeout(carouselInit, 50); }
     },
+
   ]; /* end STEPS */
 
   /* ─── navigation ─────────────────────────── */
