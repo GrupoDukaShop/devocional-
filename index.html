@@ -352,112 +352,89 @@
     },
 
 
-    /* 12 · ETAPA 07 – sales page */
+   /* 12 · ETAPA 07 – sales page */
     { hdr: false, pg: false, pct: 100,
       html() {
-        const buyBtn = (extra='') => `
-          <div class="flex flex-col gap-2 ${extra}">
+        const buyBtn = () => `
+          <div class="flex flex-col gap-2">
             <button onclick="checkout()"
               class="btn-pulse-green w-full bg-green-500 hover:bg-green-600 text-white font-bold py-5 rounded-xl text-base transition-colors">
               EU QUERO MARIA COMIGO!
             </button>
             <p class="text-center text-sm">
-              <span class="text-red-500 line-through">De R$97</span>
-              <span class="text-green-700 font-bold ml-1.5">por apenas R$37,00 ou 8x de R$5,38</span>
+              <span class="text-red-500"><s>De R$97</s></span>
+              <span class="text-green-700 font-bold ml-1"> por apenas R$37,00 ou 8x de R$5,38</span>
             </p>
           </div>`;
 
-        const imgBlock = (emoji, label='') => `
-          <div class="w-full aspect-square bg-gradient-to-b from-sky-50 to-blue-100 rounded-2xl flex flex-col items-center justify-center gap-2 border border-sky-100 text-5xl">
-            ${emoji}
-            ${ label ? `<span class="text-sm text-sky-700 font-medium mt-1">${label}</span>` : '' }
+        const imgPlaceholder = (cls='w-full') => `
+          <div class="${cls} bg-gray-100 border border-gray-300 rounded-xl flex items-center justify-center py-10 text-gray-500 text-sm font-medium">
+            [ imagem aqui ]
           </div>`;
 
-        const testimonials = [
-          { n:'Maria Aparecida', s:5, t:'Incrível! Cada dia me sinto mais próxima de Nossa Senhora. Minhas orações foram respondidas! 🙏❤️' },
-          { n:'João Carlos',     s:5, t:'Recomendo de coração. Minha vida espiritual se transformou completamente desde que comecei este devocional.' },
-          { n:'Ana Paula S.',    s:5, t:'Maravilhoso! Me ajudou a encontrar paz em momentos muito difíceis. Deus é fiel! 🌹' },
-          { n:'Regina M.',       s:5, t:'Uma experiência única de fé. Vale cada centavo. Nossa Senhora guia cada página! 🙌' },
-          { n:'Carlos Eduardo',  s:5, t:'Comprei para minha mãe e ela chorou de emoção. Presente espiritual perfeito. Obrigado!' },
-          { n:'Fátima Lima',     s:5, t:'Já no primeiro dia senti uma paz diferente. O Coração de Maria abraça cada palavra. 🌸' },
-        ];
+        const carouselSlides = [1,2,3,4,5,6].map((_, i) => `
+          <div class="carousel-slide px-1">
+            <div class="w-full bg-gray-100 border border-gray-300 rounded-xl flex items-center justify-center py-16 text-gray-500 text-sm font-medium">
+              [ imagem aqui ]
+            </div>
+          </div>`).join('');
+
+        const dots = [0,1,2,3,4,5].map(i => `
+          <button onclick="carouselGo(${i})"
+            class="w-2 h-2 rounded-full transition-colors ${i===0?'bg-sky-500':'bg-gray-300'}"
+            id="dot${i}"></button>`).join('');
 
         return `
-        <div class="step-enter flex flex-col gap-6">
-          <!-- headline -->
+        <div class="step-enter flex flex-col gap-6 pb-6">
+
           <h1 class="text-lg font-bold text-center leading-snug">
-            <span class="text-sky-600">Seu Devocional com Maria está pronto!</span>
-            <span class="text-gray-900"> Veja abaixo 🙏</span>
+            <span style="color:#0284c7">Seu Devocional com Maria está pronto!</span>
+            <strong> Veja abaixo&nbsp;🙏</strong>
           </h1>
 
-          ${ imgBlock('📿', '365 Dias com Maria') }
+          ${ imgPlaceholder('w-full') }
 
-          <!-- what's included -->
           <h2 class="text-lg font-semibold text-gray-900 text-center">O que está incluso em seu pacote devocional?</h2>
 
-          ${ imgBlock('📖', 'Devocional Diário Completo') }
-          ${ imgBlock('🎵', 'Orações em Áudio') }
+          ${ imgPlaceholder('w-full') }
+          ${ imgPlaceholder('w-full') }
 
           ${ buyBtn() }
 
-          ${ imgBlock('✨', 'Intercessões Personalizadas') }
-          ${ imgBlock('🕊️', 'Guia de Oração Diária') }
+          ${ imgPlaceholder('w-full') }
+          ${ imgPlaceholder('w-full') }
 
           ${ buyBtn() }
 
-          <!-- testimonials -->
-          <div class="flex items-center justify-center gap-2">
-            <div class="w-10 h-10 rounded-full bg-sky-100 flex items-center justify-center text-xl">🙏</div>
+          ${ imgPlaceholder('w-60 mx-auto') }
+
+          <div class="text-center">
+            <h2 class="text-lg font-semibold text-gray-900">Nosso Devocional é confiavel?</h2>
+            <p class="text-sm text-gray-600 mt-1">SIMM! 100% aqui estão algumas avaliações das pessoas que já adquiriram! 👇</p>
           </div>
-          <h2 class="text-lg font-semibold text-gray-900 text-center">Nosso Devocional é confiável?</h2>
-          <p class="text-sm text-gray-600 text-center">SIMM! 100% aqui estão algumas avaliações das pessoas que já adquiriram! 👇</p>
 
-          <!-- carousel -->
           <div class="relative overflow-hidden rounded-2xl" id="carousel">
             <div class="carousel-track" id="cTrack">
-              ${ testimonials.map(t => `
-                <div class="carousel-slide px-1">
-                  <div class="bg-gray-50 border border-gray-100 rounded-2xl p-4 flex flex-col gap-3">
-                    <div class="flex items-center gap-3">
-                      <div class="w-10 h-10 rounded-full bg-sky-100 flex items-center justify-center text-sky-700 font-bold">
-                        ${t.n[0]}
-                      </div>
-                      <div>
-                        <p class="font-semibold text-sm text-gray-900">${t.n}</p>
-                        <p class="text-yellow-400 text-sm leading-none">${'★'.repeat(t.s)}</p>
-                      </div>
-                    </div>
-                    <p class="text-sm text-gray-700 leading-relaxed">${t.t}</p>
-                  </div>
-                </div>`).join('') }
+              ${carouselSlides}
             </div>
-            <!-- dots -->
             <div class="flex justify-center gap-1.5 mt-3" id="cDots">
-              ${ testimonials.map((_,i) => `
-                <button onclick="carouselGo(${i})"
-                  class="w-2 h-2 rounded-full transition-colors ${ i===0?'bg-sky-500':'bg-gray-300' }"
-                  id="dot${i}"></button>`).join('') }
+              ${dots}
             </div>
           </div>
 
-          ${ buyBtn('mt-2') }
+          ${ buyBtn() }
 
-          <!-- guarantee -->
-          <div class="bg-green-50 border border-green-200 rounded-2xl p-5 text-center flex flex-col items-center gap-3">
-            <div class="text-5xl">🛡️</div>
-            <p class="font-bold text-green-800 text-base">Tem Garantia?</p>
-            <p class="text-sm text-green-700 leading-relaxed">
-              SIM! Estamos tão confiantes que o nosso Devocional te ajudará que garantimos
-              um <strong>reembolso total no prazo de 90 dias</strong> após a compra.
-            </p>
+          <div class="text-center">
+            <h2 class="text-lg font-semibold text-gray-900">Tem Garantia?</h2>
+            <p class="text-sm text-gray-600 mt-1">SIM! Estamos tão confiantes que o nosso Devocional te ajudará que garantimos um reembolso total no prazo de 90 dias após a compra.</p>
           </div>
 
-          ${ buyBtn('mb-6') }
+          ${ imgPlaceholder('w-44 mx-auto') }
+
         </div>`;
       },
       onEnter() { setTimeout(carouselInit, 50); }
     },
-
   ]; /* end STEPS */
 
   /* ─── navigation ─────────────────────────── */
