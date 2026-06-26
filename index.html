@@ -4,6 +4,25 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>365 dias com Maria</title>
+
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '979400168266168');
+  fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=979400168266168&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
+
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.bunny.net/css?family=inter:400,500,600,700,800&display=swap" rel="stylesheet">
   <style>
@@ -467,7 +486,15 @@
   }
 
   function checkout() {
-    window.location.href = 'https://pay.lowify.com.br/checkout.php?product_id=d2naGz';
+    var url = 'https://pay.lowify.com.br/checkout.php?product_id=d2naGz';
+    // Dispara o evento de InitiateCheckout antes de sair para o checkout externo
+    try {
+      if (typeof fbq === 'function') {
+        fbq('track', 'InitiateCheckout', { value: 37.00, currency: 'BRL' });
+      }
+    } catch (e) {}
+    // Pequeno atraso para dar tempo do beacon do pixel ser enviado
+    setTimeout(function () { window.location.href = url; }, 300);
   }
 
   function esc(s) {
